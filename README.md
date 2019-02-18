@@ -41,4 +41,16 @@ variations = [           # all variations of the item that can be crafted with t
     "blue",
     "green"
 ]
+
+[basic-construct.meta]   # meta data for the item. this can contain any string or float data
+some-meta-data = 6
+some-other-meta-data = "Maybe a description?"
+
+[basic-construct.requirements] # the requirements to craft this item in the format: <id> = <amount>
+basic-part = 10
+
+[basic-part]
+name = "Basic Part"
+tier = 4
+time = { seconds = 4 }
 ```

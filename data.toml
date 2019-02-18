@@ -13,7 +13,7 @@ variations = [           # all variations of the item that can be crafted with t
 some-meta-data = 6
 some-other-meta-data = "Maybe a description?"
 
-[basic-construct.requirements] # the requirements to craft this item in the format: <id> = <amoun>
+[basic-construct.requirements] # the requirements to craft this item in the format: <id> = <amount>
 basic-part = 10
 
 [basic-part]
