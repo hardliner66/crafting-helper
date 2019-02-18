@@ -1,0 +1,11 @@
+[package]
+name = "crafting"
+version = "0.1.0"
+authors = ["hardliner66 <hardliner66@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+serde = "1.0.87"
+serde_derive = "1.0.87"
+toml = "0.4.10"
+argparse = "0.2.2"
