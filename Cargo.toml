@@ -1,12 +1,12 @@
 [package]
-name = "crafting"
+name = "crafting-helper"
 description = "A small generic tool to calculate crafting times and resource usage for games."
 version = "1.0.0"
 authors = ["hardliner66"]
 edition = "2018"
 
-homepage = "https://github.com/hardliner66/dep"
-repository = "https://github.com/hardliner66/dep"
+homepage = "https://github.com/hardliner66/crafting-helper"
+repository = "https://github.com/hardliner66/crafting-helper"
 
 license = "AGPL"
 
@@ -16,10 +16,14 @@ categories = [
 	"command-line-utilities"
 ]
 
-keywords = ["crafting", "gaming", "games"]
+keywords = ["crafting", "gaming"]
 
 [badges]
 maintenance = { status = "actively-developed" }
+
+[[bin]]
+name = "crafting"
+path = "src/main.rs"
 
 [dependencies]
 serde = "1.0.87"
