@@ -1,11 +1,17 @@
 [package]
 name = "crafting"
+description = "A small generic tool to calculate crafting times and resource usage for games."
 version = "1.0.0"
 authors = ["hardliner66"]
 edition = "2018"
+
+homepage = "https://github.com/hardliner66/dep"
+repository = "https://github.com/hardliner66/dep"
+
 license = "AGPL"
-description = "A small generic tool to calculate crafting times and resource usage for games."
+
 readme = "README.md"
+
 categories = [
 	"command-line-utilities"
 ]
