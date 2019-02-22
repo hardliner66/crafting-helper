@@ -1,6 +1,6 @@
 # crafting-helper
 
-A small generic tool to calculate crafting times and resource usage.
+A small generic tool to calculate crafting times and resource usage for games.
 
 Currently there are only template recipes in the data file. To make this tool usable you have to add your own. See [Data Format](#data-format)
 
