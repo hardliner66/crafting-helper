@@ -207,9 +207,11 @@ fn calculate(
         }
     }
 
+    let part_count_div = craftable.count.unwrap_or(1.0);
+
     if let Some(requirements) = &craftable.requirements {
         for (name, part_count) in requirements {
-            calculate(&name, &data, parts, depth + 1, amount * (*part_count), print_tree);
+            calculate(&name, &data, parts, depth + 1, (amount * (*part_count)) / part_count_div, print_tree);
         }
     }
 }
