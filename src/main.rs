@@ -99,11 +99,13 @@ impl CraftingTime {
 #[serde(rename_all = "kebab-case")]
 struct Craftable {
     name: String,
+    #[serde(default)]
     tier: i32,
     variations: Option<Vec<String>>,
     time: Option<CraftingTime>,
     requirements: Option<BTreeMap<String, f64>>,
     meta: Option<BTreeMap<String, MetaVar>>,
+    count: Option<f64>,
 }
 
 
@@ -161,13 +163,22 @@ fn get_options() -> Options {
     }
 }
 
-fn calculate(id: &String, data: &BTreeMap<String, Craftable>, parts: &mut BTreeMap<String, CraftingData>, depth: usize, amount: f64, print_tree: bool) {
+fn calculate(
+    id: &String,
+    data: &BTreeMap<String, Craftable>,
+    parts: &mut BTreeMap<String, CraftingData>,
+    depth: usize,
+    amount: f64,
+    print_tree: bool
+) {
     let craftable = match &data.get(id) {
         Some(c) => c.clone(),
         None => {
             panic!(format!("Could not find key: {}", id));
         }
     };
+
+    let amount = calc_count(amount, craftable.count);
 
     let prefix = if depth == 0 {
         s!("")
@@ -304,6 +315,14 @@ fn find_matching(search_string: &String, data: &BTreeMap<String, Craftable>) -> 
     vec
 }
 
+fn calc_count(needed: f64, count: Option<f64>) -> f64 {
+    if let Some(n) = count {
+        (needed / n).ceil() * n
+    } else {
+        needed
+    }
+}
+
 fn main() {
     let options = get_options();
 
@@ -369,3 +388,15 @@ fn main() {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_calc_count() {
+        assert_eq!(calc_count(1.0, Some(4.0)), 4.0);
+        assert_eq!(calc_count(4.0, Some(4.0)), 4.0);
+        assert_eq!(calc_count(0.5, None), 0.5);
+    }
+}
+

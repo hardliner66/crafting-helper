@@ -20,6 +20,7 @@ basic-part = 10
 name = "Basic Part"
 tier = 4
 time = { seconds = 4 }
+count = 4 # Only 4 can be crafted at once
 
 [basic-part.requirements]
 basic-material = 2
