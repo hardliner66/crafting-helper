@@ -105,7 +105,7 @@ struct Craftable {
     time: Option<CraftingTime>,
     requirements: Option<BTreeMap<String, f64>>,
     meta: Option<BTreeMap<String, MetaVar>>,
-    count: Option<f64>,
+    amount: Option<f64>,
 }
 
 
@@ -178,7 +178,7 @@ fn calculate(
         }
     };
 
-    let amount = calc_count(amount, craftable.count);
+    let amount = calc_amount(amount, craftable.amount);
 
     let prefix = if depth == 0 {
         s!("")
@@ -207,11 +207,11 @@ fn calculate(
         }
     }
 
-    let part_count_div = craftable.count.unwrap_or(1.0);
+    let part_amount_div = craftable.amount.unwrap_or(1.0);
 
     if let Some(requirements) = &craftable.requirements {
         for (name, part_count) in requirements {
-            calculate(&name, &data, parts, depth + 1, (amount * (*part_count)) / part_count_div, print_tree);
+            calculate(&name, &data, parts, depth + 1, (amount * (*part_count)) / part_amount_div, print_tree);
         }
     }
 }
@@ -317,8 +317,8 @@ fn find_matching(search_string: &String, data: &BTreeMap<String, Craftable>) -> 
     vec
 }
 
-fn calc_count(needed: f64, count: Option<f64>) -> f64 {
-    if let Some(n) = count {
+fn calc_amount(needed: f64, amount: Option<f64>) -> f64 {
+    if let Some(n) = amount {
         (needed / n).ceil() * n
     } else {
         needed
@@ -395,10 +395,10 @@ fn main() {
 mod tests {
     use super::*;
     #[test]
-    fn test_calc_count() {
-        assert_eq!(calc_count(1.0, Some(4.0)), 4.0);
-        assert_eq!(calc_count(4.0, Some(4.0)), 4.0);
-        assert_eq!(calc_count(0.5, None), 0.5);
+    fn test_calc_amount() {
+        assert_eq!(calc_amount(1.0, Some(4.0)), 4.0);
+        assert_eq!(calc_amount(4.0, Some(4.0)), 4.0);
+        assert_eq!(calc_amount(0.5, None), 0.5);
     }
 }
 
